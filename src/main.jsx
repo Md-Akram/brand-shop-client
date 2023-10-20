@@ -8,6 +8,8 @@ import Root from './components/Root.jsx'
 import AddProduct from './components/AddProduct.jsx'
 import MyCart from './components/MyCart.jsx'
 import Login from './components/Login.jsx'
+import { AuthProvider } from './hooks/AuthProvider.jsx'
+import { Register } from './components/Register.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,6 +18,7 @@ const router = createBrowserRouter(
       <Route path='addProduct' element={<AddProduct />} />
       <Route path='myCart' element={<MyCart />} />
       <Route path='login' element={<Login />} />
+      <Route path='register' element={<Register />} />
 
     </Route>
   )
@@ -23,8 +26,8 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}>
-      <App />
-    </RouterProvider>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>,
 )
