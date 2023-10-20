@@ -10,7 +10,6 @@ const Navbar = () => {
 
     const contextValue = useContext(AuthContext)
 
-    console.log(contextValue);
 
     return (
         <div className="navbar bg-base-100 overflow-hidden">

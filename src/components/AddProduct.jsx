@@ -21,6 +21,21 @@ const AddProduct = () => {
         const addedProduct = {
             name, brandName, imgURL, type, price, description, ratings
         }
+        fetch("http://localhost:5000/products", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(addedProduct)
+        })
+            .then(res => {
+                console.log(res);
+                res.json()
+            })
+            .then(data => {
+                console.log(data)
+                form.reset()
+            })
     }
 
     return (
@@ -92,7 +107,7 @@ const AddProduct = () => {
                             ))}
                         </div>
                         {/* Add button */}
-                        <button className="text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">Button</button>
+                        <button className="text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">Add</button>
                     </form>
 
                 </div>

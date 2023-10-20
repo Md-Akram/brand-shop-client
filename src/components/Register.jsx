@@ -3,7 +3,7 @@ import { AuthContext } from '../hooks/AuthProvider'
 
 export const Register = () => {
 
-    const { signup } = useContext(AuthContext)
+    const { signup, setCurrentUser } = useContext(AuthContext)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -11,7 +11,10 @@ export const Register = () => {
         const email = form.email.value
         const pass = form.password.value
         signup(email, pass)
-            .then(res => console.log(res.user))
+            .then(res => {
+                console.log(res.user);
+                setCurrentUser(res.user)
+            })
             .catch(err => console.log(err))
     }
 

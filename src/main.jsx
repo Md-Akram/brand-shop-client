@@ -10,16 +10,18 @@ import MyCart from './components/MyCart.jsx'
 import Login from './components/Login.jsx'
 import { AuthProvider } from './hooks/AuthProvider.jsx'
 import { Register } from './components/Register.jsx'
+import PrivateRoute from './hooks/PrivateRoute.jsx'
+import { BrandPage } from './components/BrandPage.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<Root />}>
       <Route index element={<Home />} />
-      <Route path='addProduct' element={<AddProduct />} />
+      <Route path='addProduct' element={<PrivateRoute><AddProduct /></PrivateRoute>} />
       <Route path='myCart' element={<MyCart />} />
       <Route path='login' element={<Login />} />
       <Route path='register' element={<Register />} />
-
+      <Route path='brandPage/:name' element={<BrandPage />} />
     </Route>
   )
 )
