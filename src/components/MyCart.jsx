@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../hooks/AuthProvider'
+import toast from 'react-hot-toast'
 
 const MyCart = () => {
 
@@ -7,18 +8,35 @@ const MyCart = () => {
 
     const { currentUser } = useContext(AuthContext)
 
-    const id = currentUser.uid
+    const uid = currentUser.uid
 
-    useEffect(() => {
-        fetch(`http://localhost:5000/cart/${id}`)
+    const fetcher = () => {
+        fetch(`http://localhost:5000/cart/${uid}`)
             .then(res => res.json())
             .then(data => {
                 setCartProducts(data)
             })
+    }
+
+    useEffect(() => {
+        fetcher()
     }, [])
 
-    const handleClick = () => {
-        console.log('btn clicked');
+    const handleClick = (id) => {
+        fetch('http://localhost:5000/deleteProduct', {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ userId: uid, productId: id })
+        }).then(res => res.json())
+            .then(data => {
+                if (data.deletedCount) {
+                    toast.success('product deleted')
+                    fetcher()
+                }
+            })
+
     }
 
     return (
@@ -37,7 +55,7 @@ const MyCart = () => {
                                     <p className="mt-1">${product.price}</p>
                                 </div>
                                 <div>
-                                    <button onClick={handleClick} className="inline-flex text-white bg-red-500 border-0 py-2 px-4 focus:outline-none hover:bg-red-600 rounded text-lg">Delete</button>
+                                    <button onClick={() => handleClick(product._id)} className="inline-flex text-white bg-red-500 border-0 py-2 px-4 focus:outline-none hover:bg-red-600 rounded text-lg">Delete</button>
                                 </div>
                             </div>
                         </div>)
