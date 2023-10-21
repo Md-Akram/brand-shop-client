@@ -29,7 +29,6 @@ const AddProduct = () => {
             body: JSON.stringify(addedProduct)
         })
             .then(res => {
-                console.log(res);
                 res.json()
             })
             .then(data => {

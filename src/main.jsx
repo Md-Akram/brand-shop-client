@@ -19,11 +19,12 @@ const router = createBrowserRouter(
     <Route path='/' element={<Root />}>
       <Route index element={<Home />} />
       <Route path='addProduct' element={<PrivateRoute><AddProduct /></PrivateRoute>} />
-      <Route path='myCart' element={<MyCart />} />
+      <Route path='myCart' element={<PrivateRoute><MyCart /></PrivateRoute>} />
       <Route path='login' element={<Login />} />
       <Route path='register' element={<Register />} />
       <Route path='brandPage/:name' element={<BrandPage />} />
       <Route path='productDetails/:id' element={<PrivateRoute><ProductDetails /></PrivateRoute>} />
+
     </Route>
   )
 )

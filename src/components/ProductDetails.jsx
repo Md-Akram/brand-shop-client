@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { AuthContext } from '../hooks/AuthProvider'
+import toast, { Toaster } from 'react-hot-toast';
+
+
 
 const ProductDetails = () => {
 
@@ -7,6 +11,9 @@ const ProductDetails = () => {
     const [loading, setLoading] = useState(true)
 
     const { id } = useParams()
+    const { currentUser } = useContext(AuthContext)
+
+
 
     useEffect(() => {
         fetch(`http://localhost:5000/product/${id}`)
@@ -16,6 +23,24 @@ const ProductDetails = () => {
                 setLoading(false)
             })
     }, [])
+
+    const handleClick = () => {
+        if (product._id) {
+            delete product._id
+        }
+        fetch('http://localhost:5000/cart', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ ...product, uid: currentUser.uid })
+        }).then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast('Product added to cart')
+                }
+            })
+    }
 
     if (loading) {
         return <div className='w-full h-[80vh] flex items-center justify-center'><h1 className='text-4xl'>Loading</h1></div>
@@ -31,7 +56,7 @@ const ProductDetails = () => {
                     <p className="mb-8 leading-relaxed">Brand: {product.brandName}</p>
                     <p className="mb-8 leading-relaxed">Description {product.description}</p>
                     <div className="flex justify-center">
-                        <button className="inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">Add to cart</button>
+                        <button onClick={handleClick} className="inline-flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">Add to cart</button>
 
                     </div>
                 </div>

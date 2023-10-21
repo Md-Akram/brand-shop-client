@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import { AuthContext } from '../hooks/AuthProvider'
+import { Toaster } from 'react-hot-toast'
 
 const Navbar = () => {
 
@@ -13,6 +14,7 @@ const Navbar = () => {
 
     return (
         <div className="navbar bg-base-100 overflow-hidden">
+            <div><Toaster /></div>
             <div className="navbar-start">
                 <div className='w-10 h-10'>
                     <img src='https://images.pexels.com/photos/14683691/pexels-photo-14683691.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' className='w-full h-full rounded-full' alt="" />
