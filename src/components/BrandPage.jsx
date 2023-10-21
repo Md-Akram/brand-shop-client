@@ -8,7 +8,6 @@ import 'swiper/css';
 export const BrandPage = () => {
 
     const { name } = useParams()
-    console.log(name);
 
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(true)
@@ -21,8 +20,6 @@ export const BrandPage = () => {
                 setLoading(false)
             })
     }, [])
-
-    console.log(products);
 
     if (loading) {
         return <div className='w-full h-[80vh] flex items-center justify-center'><h1 className='text-4xl'>Loading</h1></div>
