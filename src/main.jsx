@@ -14,6 +14,7 @@ import PrivateRoute from './hooks/PrivateRoute.jsx'
 import { BrandPage } from './components/BrandPage.jsx'
 import ProductDetails from './components/ProductDetails.jsx'
 import UpdateProduct from './components/UpdateProduct.jsx'
+import NotFound from './components/NotFound.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
         path='updateProduct/:id'
         element={<PrivateRoute><UpdateProduct /></PrivateRoute>}
       />
+      <Route path='*' element={<NotFound />} />
     </Route>
   )
 )

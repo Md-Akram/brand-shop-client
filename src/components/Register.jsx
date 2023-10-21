@@ -1,8 +1,11 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../hooks/AuthProvider'
+import { Link, useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 export const Register = () => {
 
+    const navigate = useNavigate()
     const { signup, setCurrentUser } = useContext(AuthContext)
 
     const handleSubmit = (e) => {
@@ -10,12 +13,24 @@ export const Register = () => {
         const form = e.target
         const email = form.email.value
         const pass = form.password.value
-        signup(email, pass)
-            .then(res => {
-                console.log(res.user);
-                setCurrentUser(res.user)
-            })
-            .catch(err => console.log(err))
+
+        if (pass.length < 6) {
+            toast.error("Password must be at least 6 characters.");
+        } else if (!/[A-Z]/.test(pass)) {
+            toast.error("Password must contain at least one capital letter.");
+        } else if (!/[^A-Za-z0-9]/.test(pass)) {
+            toast.error("Password must contain at least one special character.");
+        } else {
+            signup(email, pass)
+                .then(res => {
+
+                    setCurrentUser(res.user)
+                    navigate('/')
+                })
+                .catch(err => console.log(err))
+        }
+
+
     }
 
     return (
@@ -36,6 +51,10 @@ export const Register = () => {
                         </div>
 
                         <button className="text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">Register</button>
+
+                        <div className='mt-4'>
+                            <p className='text-lg'>Already registered? <Link className='text-blue-600' to='/login' >Login</Link></p>
+                        </div>
                     </form>
                 </div>
             </div>

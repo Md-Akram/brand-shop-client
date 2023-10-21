@@ -1,9 +1,13 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../hooks/AuthProvider'
+import { Link, useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 
 const Login = () => {
 
-    const { login, setCurrentUser } = useContext(AuthContext)
+    const navigate = useNavigate()
+
+    const { login, setCurrentUser, googleLogin } = useContext(AuthContext)
 
     const handleSubmit = (e) => {
         e.preventDefault()
@@ -13,10 +17,11 @@ const Login = () => {
         login(email, pass)
             .then(res => {
                 setCurrentUser(res.user)
-                console.log(res.user)
+                toast.success('login successful')
+                navigate('/')
 
             })
-            .catch(err => console.log(err))
+            .catch(err => toast.error(err.message))
     }
 
     return (
@@ -37,9 +42,14 @@ const Login = () => {
                             <input type="password" id="password" name="password" required className="w-full bg-white rounded border border-gray-300 focus:border-green-500 focus:ring-2 focus:ring-green-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                         </div>
 
-                        <button className="text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">Button</button>
-                    </form>
+                        <button className="text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">Login</button>
 
+
+                    </form>
+                    <div className='mt-4'>
+                        <p className='text-lg'>New to the site? <Link className='text-blue-600' to='/register' >Register</Link></p>
+                        <button onClick={googleLogin} className="text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg">Login with Google</button>
+                    </div>
                 </div>
             </div>
         </section>

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const UpdateProduct = () => {
     const { id } = useParams()
@@ -7,6 +8,7 @@ const UpdateProduct = () => {
     const [product, setProduct] = useState({})
     const [selectedBrand, setSelectedBrand] = useState("");
     const [selectedType, setSelectedType] = useState("");
+    const navigate = useNavigate()
 
     const handleBrandChange = (event) => {
         setSelectedBrand(event.target.value);
@@ -40,23 +42,23 @@ const UpdateProduct = () => {
         const type = form.Type.value
         const price = form.Price.value
         const ratings = rating
-        const addedProduct = {
-            name, brandName, imgURL, type, price, description, ratings
+        const updatedProduct = {
+            name, brandName, imgURL, type, price, ratings
         }
-        fetch("http://localhost:5000/products", {
-            method: 'POST',
+        fetch(`http://localhost:5000/products/${id}`, {
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(addedProduct)
+            body: JSON.stringify(updatedProduct)
+        }).then(res => res.json()
+        ).then(data => {
+            if (data.modifiedCount > 0) {
+                toast.success('product updated')
+                navigate(`/brandPage/${product.brandName}`)
+            }
+            console.log(data);
         })
-            .then(res => {
-                res.json()
-            })
-            .then(data => {
-                console.log(data)
-                form.reset()
-            })
     }
 
     return (

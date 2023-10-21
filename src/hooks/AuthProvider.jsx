@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { app } from './firebase';
+
+const provider = new GoogleAuthProvider();
 
 export const AuthContext = createContext(null);
 
@@ -14,12 +16,29 @@ export function AuthProvider({ children }) {
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
+    function googleLogin() {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+                const user = result.user;
+                console.log(user);
+
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                const email = error.customData.email;
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                console.log(credential);
+            });
+    }
+
     function login(email, password) {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
     function logout() {
-        return signOut();
+        return signOut(auth);
     }
 
     useEffect(() => {
@@ -37,12 +56,12 @@ export function AuthProvider({ children }) {
         signup,
         login,
         logout,
-        loading
+        loading,
+        googleLogin
     };
 
     return (
         <AuthContext.Provider value={value}>
-            {/* {!loading && children} */}
             {loading ? <div className='w-full h-[80vh] flex items-center justify-center'><h1 className='text-4xl'>Loading</h1></div> : children}
         </AuthContext.Provider>
     );
