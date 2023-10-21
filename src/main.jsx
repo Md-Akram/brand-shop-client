@@ -12,6 +12,7 @@ import { AuthProvider } from './hooks/AuthProvider.jsx'
 import { Register } from './components/Register.jsx'
 import PrivateRoute from './hooks/PrivateRoute.jsx'
 import { BrandPage } from './components/BrandPage.jsx'
+import ProductDetails from './components/ProductDetails.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,6 +23,7 @@ const router = createBrowserRouter(
       <Route path='login' element={<Login />} />
       <Route path='register' element={<Register />} />
       <Route path='brandPage/:name' element={<BrandPage />} />
+      <Route path='productDetails/:id' element={<ProductDetails />} />
     </Route>
   )
 )
