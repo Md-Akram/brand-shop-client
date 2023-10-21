@@ -71,7 +71,7 @@ export const BrandPage = () => {
                                     </div>
                                     <div className="flex mt-3 items-center justify-between">
                                         <Link to={`/productDetails/${product._id}`} className="flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">Details</Link>
-                                        <button className="flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">Update</button>
+                                        <Link to={`/updateProduct/${product._id}`} className="flex text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded">Update</Link>
                                     </div>
                                 </div>
                             </div>

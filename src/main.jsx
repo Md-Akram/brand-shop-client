@@ -13,6 +13,7 @@ import { Register } from './components/Register.jsx'
 import PrivateRoute from './hooks/PrivateRoute.jsx'
 import { BrandPage } from './components/BrandPage.jsx'
 import ProductDetails from './components/ProductDetails.jsx'
+import UpdateProduct from './components/UpdateProduct.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,8 +24,14 @@ const router = createBrowserRouter(
       <Route path='login' element={<Login />} />
       <Route path='register' element={<Register />} />
       <Route path='brandPage/:name' element={<BrandPage />} />
-      <Route path='productDetails/:id' element={<PrivateRoute><ProductDetails /></PrivateRoute>} />
-
+      <Route
+        path='productDetails/:id'
+        element={<PrivateRoute><ProductDetails /></PrivateRoute>}
+      />
+      <Route
+        path='updateProduct/:id'
+        element={<PrivateRoute><UpdateProduct /></PrivateRoute>}
+      />
     </Route>
   )
 )
