@@ -5,16 +5,18 @@ import toast from 'react-hot-toast'
 const MyCart = () => {
 
     const [cartProducts, setCartProducts] = useState([])
+    const [loading, setLoading] = useState(true)
 
     const { currentUser } = useContext(AuthContext)
 
     const uid = currentUser.uid
 
     const fetcher = () => {
-        fetch(`http://localhost:5000/cart/${uid}`)
+        fetch(`https://brand-shop-server-4a912u3md-md-akrams-projects.vercel.app/cart/${uid}`)
             .then(res => res.json())
             .then(data => {
                 setCartProducts(data)
+                setLoading(false)
             })
     }
 
@@ -23,7 +25,7 @@ const MyCart = () => {
     }, [])
 
     const handleClick = (id) => {
-        fetch('http://localhost:5000/deleteProduct', {
+        fetch('https://brand-shop-server-4a912u3md-md-akrams-projects.vercel.app/deleteProduct', {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
@@ -37,6 +39,9 @@ const MyCart = () => {
                 }
             })
 
+    }
+    if (loading) {
+        return <div className='w-full h-[80vh] flex items-center justify-center'><h1 className='text-4xl'>Loading</h1></div>
     }
 
     return (

@@ -16,7 +16,7 @@ const ProductDetails = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/product/${id}`)
+        fetch(`https://brand-shop-server-4a912u3md-md-akrams-projects.vercel.app/product/${id}`)
             .then(res => res.json())
             .then(data => {
                 setProduct(data)
@@ -28,7 +28,7 @@ const ProductDetails = () => {
         if (product._id) {
             delete product._id
         }
-        fetch('http://localhost:5000/cart', {
+        fetch('https://brand-shop-server-4a912u3md-md-akrams-projects.vercel.app/cart', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

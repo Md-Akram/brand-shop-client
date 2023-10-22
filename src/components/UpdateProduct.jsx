@@ -19,7 +19,7 @@ const UpdateProduct = () => {
     }
 
     useEffect(() => {
-        fetch(`http://localhost:5000/product/${id}`)
+        fetch(`https://brand-shop-server-4a912u3md-md-akrams-projects.vercel.app/product/${id}`)
             .then(res => res.json())
             .then(data => {
                 setProduct(data)
@@ -45,7 +45,7 @@ const UpdateProduct = () => {
         const updatedProduct = {
             name, brandName, imgURL, type, price, ratings
         }
-        fetch(`http://localhost:5000/products/${id}`, {
+        fetch(`https://brand-shop-server-4a912u3md-md-akrams-projects.vercel.app/products/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -57,7 +57,6 @@ const UpdateProduct = () => {
                 toast.success('product updated')
                 navigate(`/brandPage/${product.brandName}`)
             }
-            console.log(data);
         })
     }
 

@@ -2,15 +2,15 @@ import React from 'react'
 
 const Footer = () => {
     return (
-        <footer className="text-gray-600 body-font overflow-hidden">
+        <footer className=" dark:bg-black text-gray-600 body-font overflow-hidden">
             <div className="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
                 <a className="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
                     <div className='w-10 h-10'>
                         <img src='https://images.pexels.com/photos/14683691/pexels-photo-14683691.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' className='w-full h-full rounded-full' alt="" />
                     </div>
-                    <span className="ml-3 text-xl">TechVista</span>
+                    <span className="ml-3 text-xl dark:text-white">TechVista</span>
                 </a>
-                <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2023 TechVista —
+                <p className="text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4 dark:text-white">© 2023 TechVista —
                     <a href="https://twitter.com/knyttneve" className="text-gray-600 ml-1" rel="noopener noreferrer" target="_blank">@MdAkram</a>
                 </p>
                 <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">

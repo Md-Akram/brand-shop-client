@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import toast from 'react-hot-toast';
 
 const AddProduct = () => {
 
@@ -21,18 +22,18 @@ const AddProduct = () => {
         const addedProduct = {
             name, brandName, imgURL, type, price, description, ratings
         }
-        fetch("http://localhost:5000/products", {
+        fetch("https://brand-shop-server-4a912u3md-md-akrams-projects.vercel.app/products", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(addedProduct)
         })
-            .then(res => {
-                res.json()
-            })
+            .then(res => res.json())
             .then(data => {
-                console.log(data)
+                if (data.insertedId) {
+                    toast.success('Product Added')
+                }
                 form.reset()
             })
     }

@@ -13,7 +13,7 @@ export const BrandPage = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/products/${name}`)
+        fetch(`https://brand-shop-server-4a912u3md-md-akrams-projects.vercel.app/products/${name}`)
             .then(res => res.json())
             .then(data => {
                 setProducts(data)
