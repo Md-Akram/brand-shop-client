@@ -9,7 +9,7 @@ const Brand = ({ props }) => {
                 <img className="lg:h-48 md:h-36 w-full object-cover object-center" src={img} alt="blog" />
                 <div className="p-6">
 
-                    <h1 className="title-font text-lg font-medium text-gray-900 mb-3 dark:text-white">{name}</h1>
+                    <h1 className="title-font text-lg font-medium text-gray-900 mb-3 ">{name}</h1>
 
                 </div>
             </div>

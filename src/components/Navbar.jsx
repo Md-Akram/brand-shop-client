@@ -7,35 +7,22 @@ import { Link } from "react-router-dom";
 
 const Navbar = () => {
 
-    const [theme, setTheme] = useState('light')
-
-    const handleToggle = (e) => {
-        if (e.target.checked) {
-
-            console.log('dark');
-            document.querySelector('body').classList.add('dark')
-        } else {
-            console.log('light');
-            document.querySelector('body').classList.remove('dark')
-
-        }
-    }
 
     const active = "text-white bg-green-500 border-0 py-2 px-4 focus:outline-none hover:bg-green-600 rounded text-lg"
 
-    const inactive = "text-black border-0 py-2 px-4 focus:outline-none rounded text-lg dark:text-white"
+    const inactive = "text-black border-0 py-2 px-4 focus:outline-none rounded text-lg "
 
     const { currentUser, logout } = useContext(AuthContext)
 
     return (
-        <header className="text-gray-600 body-font dark:text-white dark:bg-black">
+        <header className="text-gray-600 body-font  ">
             <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
                 <Link to='/' className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
                     <div className='w-10 h-10'>
                         <div><Toaster /></div>
                         <img src='https://images.pexels.com/photos/14683691/pexels-photo-14683691.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1' className='w-full h-full rounded-full' alt="" />
                     </div>
-                    <span className="ml-3 text-xl dark:text-white">TechVista</span>
+                    <span className="ml-3 text-xl ">TechVista</span>
                 </Link>
                 <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
                     <NavLink to='/' className={
@@ -66,7 +53,7 @@ const Navbar = () => {
                     }
 
                 </div>
-                <input onChange={handleToggle} type="checkbox" className="ml-2 toggle" />
+                {/* <input onChange={handleToggle} type="checkbox" className="ml-2 toggle" /> */}
             </div>
         </header>
     )
